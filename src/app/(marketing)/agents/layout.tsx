@@ -1,5 +1,3 @@
-import { AgentsNavigation } from "@/components/shared/sections/agents/navigation";
-
 interface AgentsLayoutProps {
   children: React.ReactNode;
 }

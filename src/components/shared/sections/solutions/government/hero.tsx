@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Building2, MoveRight, Shield, Users, Scale } from "lucide-react";
+import { MoveRight, Shield, Users, Scale } from "lucide-react";
 
 export function GovernmentHero() {
   return (

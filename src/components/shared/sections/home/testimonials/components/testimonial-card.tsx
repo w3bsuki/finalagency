@@ -29,7 +29,7 @@ export function TestimonialCard({ name, role, company, image, quote, rating }: T
             ))}
           </div>
           <blockquote className="text-lg leading-relaxed text-muted-foreground">
-            "{quote}"
+            &ldquo;{quote}&rdquo;
           </blockquote>
           <div className="flex items-center gap-4 pt-4">
             <Avatar className="h-12 w-12">
