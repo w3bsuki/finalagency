@@ -1,0 +1,175 @@
+---
+description: 
+globs: 
+---
+# Cursor Project Guidelines: AI Agency Website
+
+## Project Overview
+
+We are building a beautiful, responsive, and high-performing website for an AI agency. The website will be modern, accessible, and optimized for search engines. The design will be inspired by these websites:
+
+*   https://genpicai.framer.website/?via=remixframer
+*   https://svarog.framer.website/
+*   https://ascensiontemplate.framer.website/
+*   www.scale.com
+
+## Technology Stack
+
+*   **Framework:** Next.js 13+ (App Router)
+*   **Styling:** Tailwind CSS + Shadcn/ui
+*   **Animation:** Framer Motion
+*   **Component Library:** Shadcn/ui (which uses Radix UI)
+*   **Language:** TypeScript
+*   **Icons:** Lucide Icons (using `lucide-react`)
+*   **Package Manager:** pnpm
+
+## Project Structure
+
+Follow this project structure:
+
+2.0 Pro Experimental. Lacks access to real-time info and some Gemini features.
+Okay, great that you can add the rules now! Here's the comprehensive project rules prompt again, ready for you to copy and paste into Cursor. This is the same one we refined earlier, so it includes all the best practices and decisions we've made:
+
+Markdown
+
+# Cursor Project Guidelines: AI Agency Website
+
+## Project Overview
+
+We are building a beautiful, responsive, and high-performing website for an AI agency. The website will be modern, accessible, and optimized for search engines. The design will be inspired by these websites:
+
+*   https://genpicai.framer.website/?via=remixframer
+*   https://svarog.framer.website/
+*   https://ascensiontemplate.framer.website/
+*   www.scale.com
+
+## Technology Stack
+
+*   **Framework:** Next.js 15+ (App Router)
+*   **Styling:** Tailwind CSS + Shadcn/ui
+*   **Animation:** Framer Motion
+*   **Component Library:** Shadcn/ui (which uses Radix UI)
+*   **Language:** TypeScript
+*   **Icons:** Lucide Icons (using `lucide-react`)
+*   **Package Manager:** pnpm
+
+## Project Structure
+
+Follow this project structure:
+
+my-ai-agency/
+├── app/              # Next.js App Router
+│   ├── page.tsx      # Homepage
+│   ├── layout.tsx   # Global layout (header, footer)
+│   ├── globals.css   # Global CSS (Tailwind setup)
+│   ├── (other pages) # e.g., about, services, contact, blog
+│   │   └── page.tsx  # Each page's main content
+│   └── api/         # API routes (for later backend integration)
+├── components/       # Reusable UI components
+│   ├── ui/           # Shadcn/ui components (automatically managed)
+│   ├── shared/       # Custom components shared across multiple pages
+│   │   ├── Hero.tsx
+│   │   ├── FeatureCard.tsx
+│   │   ├── FadeInWhenVisible.tsx # Example reusable animation component
+│   │   └── ...
+│   └── (page-specific components) # Components used only on one page (optional)
+├── public/          # Static assets (images, fonts, videos)
+├── lib/             # Utility functions and constants
+│   └── utils.ts     # Example: cn (for Tailwind class merging)
+├── types/           # TypeScript type definitions (if needed)
+├── hooks/            # Custom React Hooks
+├── tailwind.config.js # Tailwind CSS configuration
+├── tsconfig.json    # TypeScript configuration
+├── components.json  # Shadcn/ui configuration
+└── ...
+
+
+*   **`app/`:** All page routes go here, using the Next.js App Router.  Each page should have its own folder (e.g., `app/about/page.tsx`).
+*   **`components/`:** All reusable UI components go here.
+    *   **`components/ui/`:** This is where Shadcn/ui components will be added automatically by the CLI.  *Do not manually modify files in this folder.*
+    *   **`components/shared/`:** Components used on multiple pages go here.
+*   **`lib/`:** Utility functions (like the `cn` function for Tailwind class merging, which Shadcn sets up) and constants go here.
+*   **`hooks/`:** Custom React hooks.
+* **`types/`:** If you define custom Typescript types, put here.
+*   **Naming Conventions:**
+    *   **Components:**  Use PascalCase (e.g., `FeatureCard`, `HeroSection`).
+    *   **Files:** Use kebab-case for files (e.g., `feature-card.tsx`, `hero-section.tsx`).
+    *   **CSS Classes:** Use Tailwind's utility classes whenever possible. For custom styles *within* a component, use the `className` prop and combine Tailwind classes with the `cn` utility function (from `@/lib/utils`).
+    *   **Variables:** Use camelCase.
+
+## Coding Style
+
+*   **Functional Components:** Use React functional components with hooks.
+*   **TypeScript:** Use TypeScript for type safety. Be explicit with types (use interfaces and types, avoid `any` where possible).
+*   **Tailwind CSS:** Use Tailwind CSS utility classes for styling. Avoid writing custom CSS whenever possible.
+*   **Shadcn/ui:** Use Shadcn/ui components as the building blocks for your UI.  Prioritize using existing Shadcn/ui components over creating custom ones.
+*   **Framer Motion:** Use Framer Motion for animations and transitions (fade-ins, slide-ins, etc.).
+*   **Comments:** Add concise comments to explain complex logic or any non-obvious code.
+*   **Clean Code:** Write clean, well-formatted code. Use consistent indentation (2 spaces or 4 spaces, be consistent).
+*   **Error Handling:** Implement basic error handling (e.g., `try...catch` blocks) where appropriate, especially for asynchronous operations.
+*   **Avoid Unnecessary `div`s:**  Use React Fragments (`<> </>` or `<React.Fragment></React.Fragment>`) to avoid unnecessary `div` elements in your JSX, especially when rendering lists of items.
+
+## Shadcn/ui Specifics
+
+*   **Adding Components:** Use the Shadcn/ui CLI with `pnpm dlx` to add components: `pnpm dlx shadcn-ui@latest add [component-name]`.  *Do not manually copy and paste code from the Shadcn/ui website.*
+*   **Customization:** Customize Shadcn/ui components primarily through props and by adding/overriding Tailwind classes via the `className` prop. If you need to make *significant* changes, create a new component that *wraps* the Shadcn/ui component, rather than modifying the Shadcn/ui component directly.
+*   **`components.json`:** Ensure the paths in your `components.json` file are accurate. This is critical for Shadcn/ui to function correctly.  The current correct configuration is:
+
+    ```json
+    {
+      "$schema": "[https://ui.shadcn.com/schema.json](mdc:https:/ui.shadcn.com/schema.json)",
+      "style": "default",
+      "rsc": true,
+      "tailwind": {
+        "config": "tailwind.config.ts",
+        "css": "app/globals.css",
+        "baseColor": "slate",
+        "cssVariables": true,
+        "prefix": ""
+      },
+      "aliases": {
+        "components": "@/components",
+        "utils": "@/lib/utils",
+        "ui": "@/components/ui",
+        "hooks": "@/hooks"
+      }
+    }
+    ```
+
+## Design Guidelines
+
+*   **Inspiration:** Use the provided Framer website examples (Genpic AI, Svarog, Ascension) and Scale.com as inspiration for the overall aesthetic.
+*   **Whitespace:** Use ample whitespace to create a clean and uncluttered layout.
+*   **Typography:** Use a consistent font family and font sizes.  The "default" Shadcn/ui style uses a sans-serif font, which is appropriate.
+*   **Color Palette:** Use a limited color palette, consistent with the "slate" base color from Shadcn/ui.  Use darker shades for backgrounds and lighter shades for text and interactive elements.  Consider using accent colors sparingly.
+*   **Responsiveness:** Design for different screen sizes (mobile, tablet, desktop). Use Tailwind's responsive modifiers (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`) extensively.
+*   **Dark Mode:** Implement a dark mode and light mode toggle, using the `next-themes` library (which Shadcn/ui supports).
+* **Accessibility:** Keep Web Content Accessibility Guidelines in mind.
+
+## Backend (Future)
+
+*   We will determine a suitable backend solution (e.g., a headless CMS, a serverless function setup, a database) later in the development process.
+
+## SEO (Future)
+
+*   Add descriptive `title` and `meta description` tags to each page.
+*   Use semantic HTML elements (e.g., `<header>`, `<footer>`, `<nav>`, `<article>`, `<aside>`) appropriately.
+*   Add `alt` text to all images.
+*   Use appropriate heading levels (h1, h2, h3, etc.) for structure and content hierarchy.
+
+## Instructions for Cursor
+
+1.  **Read this document thoroughly before generating any code.**
+2.  **Strictly adhere to the project structure and naming conventions.**
+3.  **Use the specified technology stack (Next.js 13+, Tailwind CSS, Shadcn/ui, Framer Motion, TypeScript).**
+4.  **Prioritize using Shadcn/ui components whenever possible.  If a Shadcn/ui component doesn't meet your needs, create a custom component that *wraps* the Shadcn/ui component.**
+5.  **Write clean, well-commented, and type-safe code.**
+6.  **Break down tasks into small, manageable steps.  Don't try to generate an entire page at once.**
+7.  **For each component, generate the code in a separate file within the appropriate directory.**
+8.  **Ask clarifying questions if anything is unclear.**
+9.  **Always consider responsiveness and accessibility.**
+10. **Use `pnpm` for package management and `pnpm dlx` for Shadcn/ui CLI commands.**
+
+
+***IMPORTANT***
+* IF I GIVE YOU NPM/NPX, REMIND ME THAT WE ARE USING PNMP/DLX *
