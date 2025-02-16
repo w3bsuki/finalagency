@@ -1,7 +1,17 @@
+"use client";
+
+import { AidyHero } from "@/components/shared/sections/agents/aidy/hero";
+import { AidyFeatures } from "@/components/shared/sections/agents/aidy/features";
+import { CTA } from "@/components/shared/sections/home/cta";
+import { Separator } from "@/components/ui/separator";
+
 export default function AidyAgentPage() {
   return (
-    <div className="container">
-      <h1 className="text-4xl font-bold tracking-tight">AIDY Agent</h1>
-    </div>
+    <main className="flex flex-col">
+      <AidyHero />
+      <Separator />
+      <AidyFeatures />
+      <CTA />
+    </main>
   );
 } 

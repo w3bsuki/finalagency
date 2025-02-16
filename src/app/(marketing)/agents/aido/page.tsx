@@ -1,7 +1,17 @@
+"use client";
+
+import { AidoHero } from "@/components/shared/sections/agents/aido/hero";
+import { AidoFeatures } from "@/components/shared/sections/agents/aido/features";
+import { CTA } from "@/components/shared/sections/home/cta";
+import { Separator } from "@/components/ui/separator";
+
 export default function AidoAgentPage() {
   return (
-    <div className="container">
-      <h1 className="text-4xl font-bold tracking-tight">AIDO Agent</h1>
-    </div>
+    <main className="flex flex-col">
+      <AidoHero />
+      <Separator />
+      <AidoFeatures />
+      <CTA />
+    </main>
   );
 } 

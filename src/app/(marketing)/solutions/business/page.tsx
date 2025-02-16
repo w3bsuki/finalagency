@@ -1,7 +1,15 @@
+import { BusinessHero } from "@/components/shared/sections/solutions/business/hero";
+import { BusinessFeatures } from "@/components/shared/sections/solutions/business/features";
+import { CTA } from "@/components/shared/sections/home/cta";
+import { Separator } from "@/components/ui/separator";
+
 export default function BusinessSolutionsPage() {
   return (
-    <div className="container">
-      <h1 className="text-4xl font-bold tracking-tight">Business Solutions</h1>
+    <div className="flex flex-col">
+      <BusinessHero />
+      <Separator />
+      <BusinessFeatures />
+      <CTA />
     </div>
   );
 } 

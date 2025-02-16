@@ -5,7 +5,6 @@ import {
     NavigationMenu,
     NavigationMenuContent,
     NavigationMenuItem,
-    NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
@@ -18,42 +17,44 @@ export function Header() {
     const navigationItems = [
         {
             title: "Agents",
-            description: "Discover our AI agents",
+            description: "Meet our AI agents",
+            href: "/agents",
             items: [
                 {
-                    title: "Aidr",
+                    title: "AIDR",
                     href: "/agents/aidr",
-                    description: "Browse our AI agents"
+                    description: "Your intelligent research assistant"
                 },
                 {
-                    title: "Aido",
+                    title: "AIDO",
                     href: "/agents/aido",
-                    description: "Build your own agent"
+                    description: "The operations optimization expert"
                 },
                 {
-                    title: "Aidy",
+                    title: "AIDY",
                     href: "/agents/aidy",
-                    description: "Find the perfect agent"
+                    description: "Your development companion"
                 }
             ]
         },
         {
-            title: "Services",
+            title: "Solutions",
             description: "AI Solutions",
+            href: "/solutions",
             items: [
                 {
                     title: "Business",
-                    href: "/services/business",
+                    href: "/solutions/business",
                     description: "Strategic AI implementation"
                 },
                 {
                     title: "Industry",
-                    href: "/services/industry",
+                    href: "/solutions/industry",
                     description: "Tailored AI solutions"
                 },
                 {
                     title: "Government",
-                    href: "/services/government",
+                    href: "/solutions/government",
                     description: "Seamless AI integration"
                 }
             ]
@@ -111,20 +112,25 @@ export function Header() {
                                                             {item.description}
                                                         </p>
                                                     </div>
-                                                    <Button size="sm" className="mt-10">
-                                                        Book a call today
+                                                    <Button size="sm" className="mt-10" asChild>
+                                                        <Link href={item.href || "/contact"}>
+                                                            {item.href ? `All ${item.title}` : "Book a call today"}
+                                                        </Link>
                                                     </Button>
                                                 </div>
                                                 <div className="flex flex-col text-sm h-full justify-end">
                                                     {item.items?.map((subItem) => (
-                                                        <NavigationMenuLink
+                                                        <Link
                                                             href={subItem.href}
                                                             key={subItem.title}
                                                             className="flex flex-row justify-between items-center hover:bg-muted py-2 px-4 rounded"
                                                         >
-                                                            <span>{subItem.title}</span>
+                                                            <div className="flex flex-col">
+                                                                <span>{subItem.title}</span>
+                                                                <span className="text-xs text-muted-foreground">{subItem.description}</span>
+                                                            </div>
                                                             <MoveRight className="w-4 h-4 text-muted-foreground" />
-                                                        </NavigationMenuLink>
+                                                        </Link>
                                                     ))}
                                                 </div>
                                             </div>
@@ -174,10 +180,23 @@ export function Header() {
                                                 onClick={() => setOpen(false)}
                                                 className="flex justify-between items-center text-muted-foreground hover:text-foreground py-2 px-2 rounded-md hover:bg-muted"
                                             >
-                                                <span>{subItem.title}</span>
+                                                <div className="flex flex-col">
+                                                    <span>{subItem.title}</span>
+                                                    <span className="text-xs opacity-70">{subItem.description}</span>
+                                                </div>
                                                 <MoveRight className="w-4 h-4 stroke-1" />
                                             </Link>
                                         ))}
+                                        {item.href && (
+                                            <Link
+                                                href={item.href}
+                                                onClick={() => setOpen(false)}
+                                                className="flex justify-between items-center text-primary hover:text-primary py-2 px-2 rounded-md hover:bg-muted mt-4"
+                                            >
+                                                <span>All {item.title}</span>
+                                                <MoveRight className="w-4 h-4 stroke-1" />
+                                            </Link>
+                                        )}
                                     </div>
                                 </div>
                             ))}

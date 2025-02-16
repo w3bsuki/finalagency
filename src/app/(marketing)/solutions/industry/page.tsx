@@ -1,7 +1,17 @@
-export default function IndustrySolutionsPage() {
+"use client";
+
+import { IndustryHero } from "@/components/shared/sections/solutions/industry/hero";
+import { IndustryFeatures } from "@/components/shared/sections/solutions/industry/features";
+import { CTA } from "@/components/shared/sections/home/cta";
+import { Separator } from "@/components/ui/separator";
+
+export default function IndustryPage() {
   return (
-    <div className="container">
-      <h1 className="text-4xl font-bold tracking-tight">Industry Solutions</h1>
-    </div>
+    <main className="flex flex-col">
+      <IndustryHero />
+      <Separator />
+      <IndustryFeatures />
+      <CTA />
+    </main>
   );
 } 
