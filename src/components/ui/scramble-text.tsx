@@ -16,7 +16,6 @@ export function ScrambleText({
   className,
 }: ScrambleTextProps) {
   const [displayText, setDisplayText] = useState(text);
-  const [opacity, setOpacity] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,7 +34,9 @@ export function ScrambleText({
   return (
     <motion.span
       className={cn("inline-block", className)}
-      animate={{ opacity: opacity }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
     >
       {displayText}
     </motion.span>

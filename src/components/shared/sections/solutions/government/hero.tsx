@@ -38,12 +38,16 @@ export function GovernmentHero() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="gap-2">
-                Schedule Consultation
-                <MoveRight className="h-4 w-4" />
+              <Button size="lg" className="gap-2" asChild>
+                <Link href="/contact">
+                  Schedule Consultation
+                  <MoveRight className="h-4 w-4" />
+                </Link>
               </Button>
-              <Button size="lg" variant="outline">
-                View Case Studies
+              <Button size="lg" variant="outline" asChild>
+                <Link href="/case-studies">
+                  View Case Studies
+                </Link>
               </Button>
             </div>
 
