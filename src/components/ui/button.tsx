@@ -3,8 +3,6 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-import { motion, HTMLMotionProps } from "framer-motion"
-
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
@@ -33,15 +31,11 @@ const buttonVariants = cva(
   }
 )
 
-type ButtonBaseProps = Omit<HTMLMotionProps<"button">, keyof VariantProps<typeof buttonVariants>>;
-
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
-
-const MotionButton = motion.button;
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
