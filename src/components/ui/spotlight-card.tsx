@@ -16,25 +16,26 @@ export function SpotlightCard({
   spotlightColor = "rgba(255,255,255,0.1)"
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const [isHovered, setIsHovered] = useState(false);
+  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [opacity, setOpacity] = useState(0);
 
-  function onMouseMove({ clientX, clientY }: React.MouseEvent) {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!divRef.current) return;
-    const { left, top, width, height } = divRef.current.getBoundingClientRect();
-    const x = clientX - left;
-    const y = clientY - top;
-    mouseX.set(x);
-    mouseY.set(y);
-  }
+
+    const rect = divRef.current.getBoundingClientRect();
+
+    setPosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
 
   return (
     <motion.div
       ref={divRef}
-      onMouseMove={onMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setOpacity(1)}
+      onMouseLeave={() => setOpacity(0)}
       className={cn(
         "relative w-full rounded-xl border border-white/10 bg-gradient-to-b from-white/5 to-white/0 shadow-2xl",
         className
@@ -45,12 +46,12 @@ export function SpotlightCard({
         style={{
           background: useMotionTemplate`
             radial-gradient(
-              350px circle at ${mouseX}px ${mouseY}px,
+              350px circle at ${position.x}px ${position.y}px,
               ${spotlightColor},
               transparent 80%
             )
           `,
-          opacity: isHovered ? 1 : 0,
+          opacity: opacity,
         }}
       />
       {children}

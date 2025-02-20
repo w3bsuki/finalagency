@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowRight, BarChart2, Brain, Lightbulb, Rocket, Target, Clock, CheckCircle2 } from "lucide-react";
+import { ArrowRight, BarChart2, Brain, Lightbulb, Rocket, Target, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -191,7 +191,7 @@ export default function TechCorpCaseStudy() {
             </p>
             <Button asChild size="lg" className="h-12 px-8 rounded-full">
               <Link href="/contact">
-                Get Started
+                Let&apos;s Get Started
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>

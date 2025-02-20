@@ -1,12 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Building2, Factory, Landmark, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ShineBorder } from "@/components/ui/shine-border";
 
 const solutions = [
   {

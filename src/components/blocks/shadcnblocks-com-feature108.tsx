@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
 interface TabContent {
@@ -110,21 +109,21 @@ const Feature108 = ({
                 <Card className="h-full flex flex-col relative overflow-hidden border border-blue-500/10 bg-blue-500/[0.02] backdrop-blur-sm">
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.05] to-transparent opacity-20" />
                   
-                  <CardHeader className="relative">
+                  <div className="relative p-6">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="p-2.5 rounded-xl bg-blue-500/10 backdrop-blur-sm border border-blue-500/20">
                         {tab.icon}
                       </div>
-                      <CardTitle className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/90">
+                      <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/90">
                         {tab.content.title.split(' ')[0]}
-                      </CardTitle>
+                      </h3>
                     </div>
-                    <CardDescription className="text-base text-muted-foreground/90 font-medium">
+                    <p className="text-base text-muted-foreground/90 font-medium">
                       {tab.content.description}
-                    </CardDescription>
-                  </CardHeader>
+                    </p>
+                  </div>
 
-                  <CardContent className="relative flex-1 flex flex-col justify-between">
+                  <div className="relative flex-1 flex flex-col justify-between p-6">
                     {/* Metrics */}
                     <div className="grid grid-cols-3 gap-4 pt-4 border-t border-blue-500/10">
                       {[
@@ -165,7 +164,7 @@ const Feature108 = ({
                         <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                       </Button>
                     </div>
-                  </CardContent>
+                  </div>
                 </Card>
               </Link>
             </motion.div>
