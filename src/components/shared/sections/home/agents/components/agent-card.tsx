@@ -104,12 +104,11 @@ export function AgentCard({
             {/* Features */}
             <div className="space-y-3 mb-8">
               {features.map((feature) => (
-                <div 
-                  key={feature}
-                  className="text-sm text-white/50 flex items-center gap-2"
-                >
-                  <div className="w-1 h-1 rounded-full bg-white/20" />
-                  {feature}
+                <div key={feature} className="flex items-center gap-2">
+                  <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                  <span className="text-sm text-white/90 font-medium group-hover:text-white transition-colors duration-300">
+                    {feature}
+                  </span>
                 </div>
               ))}
             </div>

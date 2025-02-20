@@ -69,7 +69,7 @@ export default function TechCorpCaseStudy() {
             >
               <Badge variant="secondary" className="w-fit">Case Study</Badge>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-200 dark:to-white">
-                TechCorp's AI Transformation Journey
+                TechCorp&apos;s AI Transformation Journey
               </h1>
               <p className="text-xl text-muted-foreground">
                 How we helped TechCorp achieve an 85% efficiency boost through strategic AI implementation

@@ -4,9 +4,9 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { MoveRight, PhoneCall } from "lucide-react";
 import { AnimatedButton } from "@/components/ui/animated-button";
-import { AnimatedText } from "@/components/ui/animated-text";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
-import { ScrambleText } from "@/components/ui/scramble-text";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export function Hero() {

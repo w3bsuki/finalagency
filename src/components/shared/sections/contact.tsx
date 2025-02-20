@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowRight, Mail, MessageSquare, Phone, Clock, CheckCircle2, Loader2 } from "lucide-react";
+import { ArrowRight, Mail, Phone, Clock, CheckCircle2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
