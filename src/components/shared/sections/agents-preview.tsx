@@ -69,24 +69,6 @@ const agents = [
   }
 ];
 
-const colorVariants = {
-  blue: "from-blue-500/30 via-blue-500/20 to-transparent",
-  green: "from-emerald-500/30 via-emerald-500/20 to-transparent",
-  purple: "from-purple-500/30 via-purple-500/20 to-transparent",
-};
-
-const iconColorVariants = {
-  blue: "text-blue-400",
-  green: "text-emerald-400",
-  purple: "text-purple-400",
-};
-
-const borderColorVariants = {
-  blue: ["rgba(59,130,246,0.3)", "rgba(59,130,246,0.5)"],
-  green: ["rgba(16,185,129,0.3)", "rgba(16,185,129,0.5)"],
-  purple: ["rgba(168,85,247,0.3)", "rgba(168,85,247,0.5)"],
-};
-
 export function AgentsPreview() {
   return (
     <section className="w-full py-24 relative overflow-hidden">

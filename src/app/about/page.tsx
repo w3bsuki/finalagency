@@ -60,7 +60,7 @@ export default function About() {
                 Bridging Humanity and Technology
               </h1>
               <p className="text-xl text-muted-foreground">
-                We're on a mission to make AI technology accessible, ethical, and beneficial for businesses and society.
+                We&apos;re on a mission to make AI technology accessible, ethical, and beneficial for businesses and society.
               </p>
             </div>
             <div className="relative rounded-xl overflow-hidden">
@@ -88,7 +88,7 @@ export default function About() {
                 Founded in 2020, we set out to bridge the gap between advanced AI technology and practical business needs. Our journey began with a simple belief: AI should be accessible, understandable, and beneficial for everyone.
               </p>
               <p className="text-lg text-muted-foreground">
-                Today, we're proud to be at the forefront of AI innovation, helping businesses across sectors harness the power of artificial intelligence while maintaining a strong commitment to ethical practices and human-centric solutions.
+                Today, we&apos;re proud to be at the forefront of AI innovation, helping businesses across sectors harness the power of artificial intelligence while maintaining a strong commitment to ethical practices and human-centric solutions.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">

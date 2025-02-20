@@ -108,7 +108,7 @@ export function AiOverview() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {features.map((feature, index) => (
+          {features.map((feature) => (
             <Link
               key={feature.title}
               href={`/solutions#${feature.title.toLowerCase().replace(/\s+/g, '-')}`}
