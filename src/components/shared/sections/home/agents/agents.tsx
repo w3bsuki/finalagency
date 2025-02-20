@@ -20,9 +20,9 @@ const agents = [
       "Insight generation"
     ],
     stats: {
-      speed: "10x Faster",
-      accuracy: "95%",
-      coverage: "100%"
+      "Performance": "10x",
+      "Accuracy": "95%",
+      "Coverage": "100%"
     }
   },
   {
@@ -38,9 +38,9 @@ const agents = [
       "Performance tracking"
     ],
     stats: {
-      efficiency: "85%",
-      automation: "70%",
-      savings: "45%"
+      "Performance": "85%",
+      "Accuracy": "70%",
+      "Coverage": "45%"
     }
   },
   {
@@ -56,9 +56,9 @@ const agents = [
       "Documentation"
     ],
     stats: {
-      productivity: "3x",
-      quality: "99%",
-      coverage: "95%"
+      "Performance": "3x",
+      "Accuracy": "99%",
+      "Coverage": "95%"
     }
   },
 ];
