@@ -7,8 +7,6 @@ import { cn } from "@/lib/utils";
 interface ScrambleTextProps {
   text: string;
   className?: string;
-  speed?: number;
-  scrambleTime?: number;
 }
 
 const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
@@ -16,15 +14,13 @@ const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567
 export function ScrambleText({
   text,
   className,
-  speed = 50,
-  scrambleTime = 1000,
 }: ScrambleTextProps) {
   const [displayText, setDisplayText] = useState(text);
-  const [isScrambling, setIsScrambling] = useState(false);
+  const [opacity, setOpacity] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const newText = text.split('').map((char, i) => {
+      const newText = text.split('').map(char => {
         if (Math.random() < 0.1) {
           return characters[Math.floor(Math.random() * characters.length)];
         }
@@ -39,7 +35,7 @@ export function ScrambleText({
   return (
     <motion.span
       className={cn("inline-block", className)}
-      animate={{ opacity: isScrambling ? 0.7 : 1 }}
+      animate={{ opacity: opacity }}
     >
       {displayText}
     </motion.span>

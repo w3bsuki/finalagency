@@ -22,8 +22,7 @@ const Command = React.forwardRef<
 ));
 Command.displayName = CommandPrimitive.displayName;
 
-// @typescript-eslint/no-empty-interface
-interface CommandDialogProps extends DialogProps {}
+type CommandDialogProps = DialogProps;
 
 function CommandDialog({ children, ...props }: CommandDialogProps) {
   return (

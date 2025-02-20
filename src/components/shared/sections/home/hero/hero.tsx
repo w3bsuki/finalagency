@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import { MoveRight, PhoneCall } from "lucide-react";
 import { AnimatedButton } from "@/components/ui/animated-button";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export function Hero() {

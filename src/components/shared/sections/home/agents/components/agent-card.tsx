@@ -16,7 +16,6 @@ interface AgentCardProps {
   color: string;
   features: string[];
   stats: Record<string, string>;
-  index: number;
 }
 
 const cardVariants = {
@@ -41,8 +40,7 @@ export function AgentCard({
   icon,
   color,
   features,
-  stats,
-  index 
+  stats
 }: AgentCardProps) {
   const Icon = icon;
   const accentColorMap = {

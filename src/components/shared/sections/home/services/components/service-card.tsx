@@ -1,7 +1,6 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { MoveRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -22,7 +21,6 @@ interface ServiceCardProps {
     label: string;
     value: string;
   }>;
-  index: number;
 }
 
 export function ServiceCard({ 
@@ -32,8 +30,7 @@ export function ServiceCard({
   icon: Icon,
   color,
   features,
-  stats,
-  index 
+  stats
 }: ServiceCardProps) {
   return (
     <Link href={href} className="block h-full">

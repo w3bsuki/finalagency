@@ -4,9 +4,6 @@ import { ProcessCard } from "./components/process-card";
 import { Separator } from "@/components/ui/separator";
 import { Search, PenTool, Wrench, Rocket, LineChart } from "lucide-react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { ParticleBackground } from "@/components/ui/particle-background";
 
 const steps = [

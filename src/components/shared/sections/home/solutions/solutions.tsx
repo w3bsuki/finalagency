@@ -3,9 +3,6 @@
 import { ServiceCard } from "./components/service-card";
 import { motion } from "framer-motion";
 import { GradientBackground } from "@/components/ui/gradient-background";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 const solutions = [
   {
