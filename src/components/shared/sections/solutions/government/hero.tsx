@@ -5,18 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Landmark, MoveRight, Shield, Users, Scale } from "lucide-react";
 import Link from "next/link";
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 }
-};
-
-const stats = [
-  { icon: Shield, label: "Data Security Compliance", value: "99.9%" },
-  { icon: Users, label: "Service Efficiency Increase", value: "+60%" },
-  { icon: Scale, label: "Citizen Service Availability", value: "24/7" }
-];
-
 export function GovernmentHero() {
   return (
     <section className="w-full">
@@ -53,9 +41,9 @@ export function GovernmentHero() {
 
             <div className="grid grid-cols-3 gap-4">
               {[
-                { icon: Shield, label: "99.9% Security" },
-                { icon: Users, label: "+60% Efficiency" },
-                { icon: Scale, label: "24/7 Service" },
+                { icon: Shield, label: "99.9% Security", value: "Data Security Compliance" },
+                { icon: Users, label: "+60% Efficiency", value: "Service Efficiency Increase" },
+                { icon: Scale, label: "24/7 Service", value: "Citizen Service Availability" }
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
