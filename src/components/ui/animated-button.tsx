@@ -1,76 +1,53 @@
 "use client";
 
+import * as React from "react";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, HTMLMotionProps } from "framer-motion";
+import { ButtonHTMLAttributes } from "react";
 
-interface AnimatedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-  variant?: "primary" | "secondary" | "outline" | "ghost";
-  size?: "default" | "sm" | "lg";
-  glowColor?: string;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+  size?: "default" | "sm" | "lg" | "icon";
+  className?: string;
 }
 
-export function AnimatedButton({
-  children,
-  className,
-  variant = "primary",
-  size = "default",
-  glowColor = "rgba(255, 255, 255, 0.2)",
-  ...props
-}: AnimatedButtonProps) {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+const buttonVariants = {
+  default: "bg-primary text-primary-foreground hover:bg-primary/90",
+  destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+  outline: "border border-input hover:bg-accent hover:text-accent-foreground",
+  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+  ghost: "hover:bg-accent hover:text-accent-foreground",
+  link: "underline-offset-4 hover:underline text-primary",
+};
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!buttonRef.current) return;
-    const rect = buttonRef.current.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
+const buttonSizes = {
+  default: "h-10 py-2 px-4",
+  sm: "h-9 px-3 rounded-md",
+  lg: "h-11 px-8 rounded-md",
+  icon: "h-10 w-10",
+};
 
-  const variants = {
-    primary: "bg-primary text-primary-foreground hover:bg-primary/90",
-    secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-    outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-    ghost: "hover:bg-accent hover:text-accent-foreground",
-  };
+export const AnimatedButton = React.forwardRef<HTMLButtonElement, ButtonProps & HTMLMotionProps<"button">>(
+  ({ className, variant = "default", size = "default", ...props }, ref) => {
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
 
-  const sizes = {
-    default: "h-10 px-4 py-2",
-    sm: "h-9 rounded-md px-3",
-    lg: "h-11 rounded-md px-8",
-  };
+    React.useImperativeHandle(ref, () => buttonRef.current!);
 
-  return (
-    <motion.button
-      ref={buttonRef}
-      className={cn(
-        "relative inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-        variants[variant],
-        sizes[size],
-        className
-      )}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      {...props}
-    >
-      <div className="relative z-10 flex items-center justify-center gap-2">
-        {children}
-      </div>
-      <motion.div
-        className="absolute inset-0 rounded-md"
-        style={{
-          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, ${glowColor}, transparent 70%)`,
-          opacity: isHovered ? 1 : 0,
-        }}
+    return (
+      <motion.button
+        ref={buttonRef}
+        className={cn(
+          "relative inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+          buttonVariants[variant as keyof typeof buttonVariants],
+          buttonSizes[size as keyof typeof buttonSizes],
+          className
+        )}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        {...props}
       />
-    </motion.button>
-  );
-} 
+    );
+  }
+);
+
+AnimatedButton.displayName = "AnimatedButton"; 
