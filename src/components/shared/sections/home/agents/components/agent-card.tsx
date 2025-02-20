@@ -16,6 +16,7 @@ interface AgentCardProps {
   color: string;
   features: string[];
   stats: Record<string, string>;
+  index: number;
 }
 
 const cardVariants = {
