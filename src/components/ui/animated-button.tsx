@@ -2,13 +2,11 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { motion, HTMLMotionProps } from "framer-motion";
-import { ButtonHTMLAttributes } from "react";
+import { motion } from "framer-motion";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ComponentPropsWithoutRef<typeof motion.button> {
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
   size?: "default" | "sm" | "lg" | "icon";
-  className?: string;
 }
 
 const buttonVariants = {
@@ -27,19 +25,15 @@ const buttonSizes = {
   icon: "h-10 w-10",
 };
 
-export const AnimatedButton = React.forwardRef<HTMLButtonElement, ButtonProps & HTMLMotionProps<"button">>(
+export const AnimatedButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "default", ...props }, ref) => {
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
-
-    React.useImperativeHandle(ref, () => buttonRef.current!);
-
     return (
       <motion.button
-        ref={buttonRef}
+        ref={ref}
         className={cn(
           "relative inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-          buttonVariants[variant as keyof typeof buttonVariants],
-          buttonSizes[size as keyof typeof buttonSizes],
+          buttonVariants[variant],
+          buttonSizes[size],
           className
         )}
         whileHover={{ scale: 1.02 }}
