@@ -21,6 +21,7 @@ interface ServiceCardProps {
     label: string;
     value: string;
   }>;
+  index: number;
 }
 
 export function ServiceCard({ 
