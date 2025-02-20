@@ -46,7 +46,7 @@ export function FloatingNav() {
           transition={{ duration: 0.2 }}
           className="fixed bottom-5 left-1/2 z-50 -translate-x-1/2 transform"
         >
-          <GlassCard variant="dark" className="p-2">
+          <GlassCard variant="primary" className="p-2 bg-black/40 backdrop-blur-sm">
             <nav className="flex items-center gap-1">
               {navItems.map((item) => {
                 const Icon = item.icon;
