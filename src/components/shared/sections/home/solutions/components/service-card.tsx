@@ -33,7 +33,10 @@ export function ServiceCard({
     <Link href={href} className="block h-full">
       <motion.div
         whileHover={{ scale: 1.02 }}
-        transition={{ duration: 0.2 }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        viewport={{ once: true }}
         className="h-full"
       >
         <Card className="relative h-full group overflow-hidden border-white/[0.05] bg-black/40 backdrop-blur-sm">
