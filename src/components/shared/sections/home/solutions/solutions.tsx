@@ -1,8 +1,9 @@
 "use client";
 
-import { ServiceCard } from "./components/service-card";
+import { Building2, Factory, Landmark } from "lucide-react";
 import { motion } from "framer-motion";
 import { GradientBackground } from "@/components/ui/gradient-background";
+import { ServiceCard } from "./components/service-card";
 
 const solutions = [
   {
