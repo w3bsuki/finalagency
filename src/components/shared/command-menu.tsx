@@ -15,6 +15,8 @@ import {
   Landmark,
   Brain,
   Sparkles,
+  Search,
+  ArrowRight,
 } from "lucide-react";
 
 import {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Cpu, Network, Zap, LineChart, Shield, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -40,27 +40,6 @@ const features = [
     color: "purple"
   }
 ];
-
-const colorVariants = {
-  blue: {
-    icon: "bg-blue-500/10 border-blue-500/20 text-blue-400",
-    card: "hover:bg-gradient-to-b hover:from-blue-500/[0.075] hover:to-transparent",
-    badge: "bg-blue-500/10 border-blue-500/20 text-blue-400",
-    glow: "group-hover:bg-blue-500/[0.15]"
-  },
-  green: {
-    icon: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
-    card: "hover:bg-gradient-to-b hover:from-emerald-500/[0.075] hover:to-transparent",
-    badge: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
-    glow: "group-hover:bg-emerald-500/[0.15]"
-  },
-  purple: {
-    icon: "bg-purple-500/10 border-purple-500/20 text-purple-400",
-    card: "hover:bg-gradient-to-b hover:from-purple-500/[0.075] hover:to-transparent",
-    badge: "bg-purple-500/10 border-purple-500/20 text-purple-400",
-    glow: "group-hover:bg-purple-500/[0.15]"
-  }
-};
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },

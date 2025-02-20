@@ -32,36 +32,6 @@ const solutions = [
   }
 ];
 
-const colorVariants = {
-  blue: {
-    icon: "bg-blue-500/10 border-blue-500/20 text-blue-400",
-    card: "hover:bg-gradient-to-b hover:from-blue-500/[0.075] hover:to-transparent",
-    glow: "group-hover:bg-blue-500/[0.15]"
-  },
-  green: {
-    icon: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
-    card: "hover:bg-gradient-to-b hover:from-emerald-500/[0.075] hover:to-transparent",
-    glow: "group-hover:bg-emerald-500/[0.15]"
-  },
-  purple: {
-    icon: "bg-purple-500/10 border-purple-500/20 text-purple-400",
-    card: "hover:bg-gradient-to-b hover:from-purple-500/[0.075] hover:to-transparent",
-    glow: "group-hover:bg-purple-500/[0.15]"
-  }
-};
-
-const iconColorVariants = {
-  blue: "text-blue-400",
-  green: "text-emerald-400",
-  purple: "text-purple-400",
-};
-
-const borderColorVariants = {
-  blue: ["rgba(59,130,246,0.3)", "rgba(59,130,246,0.5)"],
-  green: ["rgba(16,185,129,0.3)", "rgba(16,185,129,0.5)"],
-  purple: ["rgba(168,85,247,0.3)", "rgba(168,85,247,0.5)"],
-};
-
 export function SolutionsPreview() {
   return (
     <section className="w-full py-24 relative overflow-hidden">
