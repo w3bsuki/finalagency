@@ -2,48 +2,126 @@
 
 import { AgentCard } from "./components/agent-card";
 import { Separator } from "@/components/ui/separator";
+import { Brain, Bot, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import { ParticleBackground } from "@/components/ui/particle-background";
 
 const agents = [
   {
     title: "AIDR",
     description: "Your intelligent research assistant. AIDR helps analyze data, generate insights, and accelerate your research process.",
     href: "/agents/aidr",
+    icon: Brain,
+    color: "blue",
+    features: [
+      "Advanced data analysis",
+      "Pattern recognition",
+      "Research automation",
+      "Insight generation"
+    ],
+    stats: {
+      speed: "10x Faster",
+      accuracy: "95%",
+      coverage: "100%"
+    }
   },
   {
     title: "AIDO",
     description: "The operations optimization expert. AIDO streamlines workflows, automates tasks, and improves operational efficiency.",
     href: "/agents/aido",
+    icon: Bot,
+    color: "green",
+    features: [
+      "Process automation",
+      "Workflow optimization",
+      "Resource management",
+      "Performance tracking"
+    ],
+    stats: {
+      efficiency: "85%",
+      automation: "70%",
+      savings: "45%"
+    }
   },
   {
     title: "AIDY",
     description: "Your development companion. AIDY assists with code generation, debugging, and technical documentation.",
     href: "/agents/aidy",
+    icon: Sparkles,
+    color: "purple",
+    features: [
+      "Code generation",
+      "Automated testing",
+      "Bug detection",
+      "Documentation"
+    ],
+    stats: {
+      productivity: "3x",
+      quality: "99%",
+      coverage: "95%"
+    }
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
 export function Agents() {
   return (
-    <section className="w-full bg-muted/50">
-      <Separator />
-      <div className="container max-w-6xl mx-auto px-4">
-        <div className="flex gap-8 py-16 sm:py-20 lg:py-32 items-center justify-center flex-col">
-          <div className="flex gap-4 flex-col text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter">
+    <section className="relative w-full overflow-hidden bg-black">
+      {/* Background with particles */}
+      <div className="absolute inset-0">
+        <ParticleBackground 
+          variant="connect" 
+          quantity={30}
+          speed={0.5}
+          color="rgba(255, 255, 255, 0.3)"
+        />
+      </div>
+
+      <Separator className="bg-white/5" />
+      <div className="container px-4 sm:px-6 relative z-10">
+        <div className="flex gap-8 sm:gap-12 py-16 sm:py-20 items-center justify-center flex-col">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex gap-3 flex-col text-center max-w-[640px] mx-auto px-0 sm:px-4"
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
               Meet Our AI Agents
             </h2>
-            <p className="text-base sm:text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-[700px]">
+            <p className="text-base sm:text-lg text-white/70 leading-relaxed">
               Specialized AI agents designed to handle specific tasks and challenges in your organization.
             </p>
-          </div>
+          </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full max-w-[1200px] mx-auto"
+          >
             {agents.map((agent, index) => (
-              <AgentCard key={agent.href} {...agent} index={index} />
+              <AgentCard 
+                key={agent.href} 
+                {...agent} 
+                index={index} 
+              />
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
-      <Separator />
+      <Separator className="bg-white/5" />
     </section>
   );
 } 

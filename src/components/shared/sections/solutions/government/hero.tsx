@@ -1,69 +1,80 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Landmark, MoveRight, Shield, Users, Scale } from "lucide-react";
 import { motion } from "framer-motion";
-import { MoveRight, Shield, Users, Scale } from "lucide-react";
+import { GradientBackground } from "@/components/ui/gradient-background";
+import { GlassCard } from "@/components/ui/glass-card";
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
+};
+
+const stats = [
+  { icon: Shield, label: "Data Security Compliance", value: "99.9%" },
+  { icon: Users, label: "Service Efficiency Increase", value: "+60%" },
+  { icon: Scale, label: "Citizen Service Availability", value: "24/7" }
+];
 
 export function GovernmentHero() {
   return (
     <section className="w-full">
       <div className="container max-w-6xl mx-auto px-4">
-        <div className="flex gap-8 py-16 sm:py-20 lg:py-32 items-center justify-center flex-col">
-          <div className="flex gap-4 flex-col text-center">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight"
-            >
-              Transform Public Service Delivery
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-base sm:text-lg leading-relaxed text-muted-foreground max-w-[700px]"
-            >
-              Empower your agency with AI-driven solutions that enhance citizen services, improve operational efficiency, and ensure data security.
-            </motion.p>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex gap-4 justify-center mt-4"
-            >
-              <Button size="lg">
+        <div className="flex gap-12 py-16 sm:py-20 lg:py-32 items-center justify-between flex-col lg:flex-row">
+          <div className="flex gap-6 flex-col lg:max-w-[600px]">
+            <div className="inline-flex items-center gap-2 text-muted-foreground">
+              <Landmark className="h-5 w-5" />
+              <span className="text-sm font-medium">Government Solutions</span>
+            </div>
+            
+            <div className="flex gap-4 flex-col">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
+                Transform Public Service Delivery
+              </h1>
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground">
+                Empower your agency with AI-driven solutions that enhance citizen services, improve operational efficiency, and ensure data security.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button size="lg" className="gap-2">
                 Schedule Consultation
-                <MoveRight className="ml-2 h-4 w-4" />
+                <MoveRight className="h-4 w-4" />
               </Button>
               <Button size="lg" variant="outline">
                 View Case Studies
               </Button>
-            </motion.div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              {[
+                { icon: Shield, label: "99.9% Security" },
+                { icon: Users, label: "+60% Efficiency" },
+                { icon: Scale, label: "24/7 Service" },
+              ].map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center gap-2 text-center"
+                >
+                  <div className="p-2 rounded-md bg-primary/10">
+                    <stat.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <p className="text-xs sm:text-sm font-medium">{stat.label}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full"
-          >
-            <div className="flex flex-col gap-2 items-center justify-center p-6 rounded-lg bg-muted/50">
-              <Shield className="h-8 w-8 text-primary" />
-              <h3 className="text-2xl font-semibold">99.9%</h3>
-              <p className="text-sm text-muted-foreground text-center">Data Security Compliance</p>
-            </div>
-            <div className="flex flex-col gap-2 items-center justify-center p-6 rounded-lg bg-muted/50">
-              <Users className="h-8 w-8 text-primary" />
-              <h3 className="text-2xl font-semibold">+60%</h3>
-              <p className="text-sm text-muted-foreground text-center">Service Efficiency Increase</p>
-            </div>
-            <div className="flex flex-col gap-2 items-center justify-center p-6 rounded-lg bg-muted/50">
-              <Scale className="h-8 w-8 text-primary" />
-              <h3 className="text-2xl font-semibold">24/7</h3>
-              <p className="text-sm text-muted-foreground text-center">Citizen Service Availability</p>
-            </div>
-          </motion.div>
+          <div className="lg:max-w-[500px] w-full aspect-square relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-3xl" />
+            {/* Add government/public sector illustration here */}
+          </div>
         </div>
       </div>
     </section>

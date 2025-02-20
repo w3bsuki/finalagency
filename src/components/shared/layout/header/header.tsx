@@ -21,19 +21,19 @@ export function Header() {
             href: "/agents",
             items: [
                 {
-                    title: "AIDR",
+                    title: "Aidr",
                     href: "/agents/aidr",
-                    description: "Your intelligent research assistant"
+                    description: "Most Powerful"
                 },
                 {
-                    title: "AIDO",
+                    title: "Aido",
                     href: "/agents/aido",
-                    description: "The operations optimization expert"
+                    description: "Data Manager"
                 },
                 {
-                    title: "AIDY",
+                    title: "Aidy",
                     href: "/agents/aidy",
-                    description: "Your development companion"
+                    description: "Customer Support"
                 }
             ]
         },
@@ -61,22 +61,23 @@ export function Header() {
         },
         {
             title: "About",
-            description: "Learn more",
+            description: "Our Company",
+            href: "/about",
             items: [
                 {
-                    title: "AI Agents",
-                    href: "/about/ai-agents",
-                    description: "Learn about our AI agents"
+                    title: "About Us",
+                    href: "/about",
+                    description: "Learn about our company"
                 },
                 {
-                    title: "Services",
-                    href: "/about/services",
-                    description: "Our service offerings"
+                    title: "Our Mission",
+                    href: "/about#mission",
+                    description: "Our vision and values"
                 },
                 {
-                    title: "AI and Humans",
-                    href: "/about/ai-and-humans",
-                    description: "How we combine AI with human expertise"
+                    title: "Our Team",
+                    href: "/about#team",
+                    description: "Meet the experts behind our solutions"
                 }
             ]
         }

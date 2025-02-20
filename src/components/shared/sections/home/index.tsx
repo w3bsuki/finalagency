@@ -4,6 +4,7 @@ import { Agents } from "./agents";
 import { Benefits } from "./benefits";
 import { Testimonials } from "./testimonials";
 import { CTA } from "./cta";
+import { Process } from "./process/process";
 
 export function Home() {
   return (
@@ -11,6 +12,7 @@ export function Home() {
       <Hero />
       <Services />
       <Agents />
+      <Process />
       <Benefits />
       <Testimonials />
       <CTA />

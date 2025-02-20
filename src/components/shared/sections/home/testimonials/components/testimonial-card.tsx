@@ -1,8 +1,10 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Star } from "lucide-react";
+import { GlassCard } from "@/components/ui/glass-card";
+import { motion } from "framer-motion";
 
 interface TestimonialCardProps {
   name: string;
@@ -15,24 +17,29 @@ interface TestimonialCardProps {
 
 export function TestimonialCard({ name, role, company, image, quote, rating }: TestimonialCardProps) {
   return (
-    <Card className="h-full">
+    <GlassCard className="h-full group">
       <CardContent className="pt-6">
         <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-2">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-center gap-2"
+          >
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}
-                className={`h-4 w-4 ${
+                className={`h-4 w-4 transition-colors duration-300 ${
                   i < rating ? "fill-primary text-primary" : "fill-muted text-muted"
                 }`}
               />
             ))}
-          </div>
+          </motion.div>
           <blockquote className="text-lg leading-relaxed text-muted-foreground">
             &ldquo;{quote}&rdquo;
           </blockquote>
           <div className="flex items-center gap-4 pt-4">
-            <Avatar className="h-12 w-12">
+            <Avatar className="h-12 w-12 ring-2 ring-primary/20 transition-all duration-300 group-hover:ring-primary/40">
               <AvatarImage src={image} alt={name} />
               <AvatarFallback>{name[0]}</AvatarFallback>
             </Avatar>
@@ -45,6 +52,6 @@ export function TestimonialCard({ name, role, company, image, quote, rating }: T
           </div>
         </div>
       </CardContent>
-    </Card>
+    </GlassCard>
   );
 } 
