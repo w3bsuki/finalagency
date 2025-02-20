@@ -4,7 +4,6 @@ import { ProcessCard } from "./components/process-card";
 import { Separator } from "@/components/ui/separator";
 import { Search, PenTool, Wrench, Rocket, LineChart } from "lucide-react";
 import { motion } from "framer-motion";
-import { ParticleBackground } from "@/components/ui/particle-background";
 
 const steps = [
   {
@@ -128,14 +127,7 @@ const itemVariants = {
 export function Process() {
   return (
     <section className="relative w-full overflow-hidden bg-black">
-      <div className="absolute inset-0">
-        <ParticleBackground 
-          variant="connect" 
-          quantity={30}
-          speed={0.5}
-          color="rgba(255, 255, 255, 0.3)"
-        />
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black" />
 
       <Separator className="bg-white/5" />
       <div className="container max-w-6xl mx-auto px-4 relative z-10">
