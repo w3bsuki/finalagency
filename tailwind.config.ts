@@ -17,6 +17,9 @@ function addVariablesForColors({ addBase, theme }: any) {
 const config = {
     darkMode: ["class"],
     content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
   theme: {
@@ -128,7 +131,7 @@ const config = {
       },
   	}
   },
-  plugins: [addVariablesForColors],
+  plugins: [addVariablesForColors, require("tailwindcss-animate")],
 } satisfies Config;
 
 export default config;

@@ -4,7 +4,6 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { cn } from "@/lib/utils";
-import { VariantProps } from "class-variance-authority";
 import { ButtonProps } from "@/components/ui/button";
 import Link from "next/link";
 
