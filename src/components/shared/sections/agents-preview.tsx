@@ -129,14 +129,8 @@ export function AgentsPreview() {
                 </div>
                 
                 {/* Icon Container */}
-                <div className="relative p-2.5 rounded-lg backdrop-blur-sm border border-white/10 mb-4 overflow-hidden">
+                <div className="relative p-2.5 rounded-lg backdrop-blur-sm border border-white/10 mb-4">
                   {agent.icon("w-6 h-6 text-white/80")}
-                  <BorderBeam 
-                    colorFrom="rgba(255, 255, 255, 0.3)"
-                    colorTo="rgba(255, 255, 255, 0.15)"
-                    duration={6}
-                    size={30}
-                  />
                 </div>
                 
                 {/* Content Container */}
