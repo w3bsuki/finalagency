@@ -3,7 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { RainbowButton } from "@/components/ui/rainbow-button";
+import { BorderBeamButton } from "@/components/ui/border-beam-button";
 import { VercelChat } from "@/components/ui/vercel-chat";
 import { BorderBeam } from "@/components/ui/border-beam";
 
@@ -116,21 +116,31 @@ export function AgentsPreview() {
               transition={{ delay: index * 0.1 }}
               className="w-full max-w-sm"
             >
-              <div className="relative p-6 rounded-lg border border-white/10 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition-colors h-[300px] flex flex-col items-center text-center">
-                <BorderBeam
-                  colorFrom="rgba(255, 255, 255, 0.2)"
-                  colorTo="rgba(255, 255, 255, 0.1)"
-                  duration={4}
-                  size={100}
-                />
+              <motion.div 
+                className="relative p-6 rounded-lg border border-white/10 bg-black/40 backdrop-blur-sm h-[300px] flex flex-col items-center text-center overflow-hidden"
+              >
+                <div className="absolute inset-0 rounded-lg overflow-hidden">
+                  <BorderBeam 
+                    colorFrom="rgba(255, 255, 255, 0.4)"
+                    colorTo="rgba(255, 255, 255, 0.2)"
+                    duration={6}
+                    size={150}
+                  />
+                </div>
                 
                 {/* Icon Container */}
-                <div className="p-2.5 rounded-lg backdrop-blur-sm border border-white/10 mb-4 transition-transform duration-300 group-hover:scale-110">
+                <div className="relative p-2.5 rounded-lg backdrop-blur-sm border border-white/10 mb-4 overflow-hidden">
                   {agent.icon("w-6 h-6 text-white/80")}
+                  <BorderBeam 
+                    colorFrom="rgba(255, 255, 255, 0.3)"
+                    colorTo="rgba(255, 255, 255, 0.15)"
+                    duration={6}
+                    size={30}
+                  />
                 </div>
                 
                 {/* Content Container */}
-                <div className="flex-1 flex flex-col items-center">
+                <div className="flex-1 flex flex-col items-center relative z-10">
                   <h3 className="text-3xl font-light text-white mb-2">
                     {agent.name}
                   </h3>
@@ -144,19 +154,23 @@ export function AgentsPreview() {
                   </p>
                 </div>
 
-                {/* Action Button - Centered at bottom */}
-                <div className="mt-4 w-full px-4">
-                  <RainbowButton 
+                {/* Action Button */}
+                <div className="mt-4 w-full px-4 relative z-10">
+                  <BorderBeamButton 
                     href={agent.href}
                     className="w-full text-[11px] font-light tracking-wider py-1"
+                    variant="outline"
+                    size="sm"
+                    beamSize={30}
+                    beamDuration={6}
                   >
                     <span className="flex items-center justify-center gap-1.5">
                       {agent.name === "AIDY" ? "Demo" : `Meet ${agent.name}`}
                       <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
                     </span>
-                  </RainbowButton>
+                  </BorderBeamButton>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
@@ -178,14 +192,12 @@ export function AgentsPreview() {
 
             <div className="relative">
               <VercelChat />
-              <div className="absolute top-0 left-0 right-0 h-[64px] rounded-lg overflow-hidden">
-                <BorderBeam 
-                  colorFrom="rgba(255, 255, 255, 0.2)"
-                  colorTo="rgba(255, 255, 255, 0.1)"
-                  duration={4}
-                  size={100}
-                />
-              </div>
+              <motion.div 
+                className="absolute inset-0 rounded-lg opacity-[0.03]"
+                style={{
+                  background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.8) 0%, transparent 60%)',
+                }}
+              />
             </div>
           </div>
         </motion.div>

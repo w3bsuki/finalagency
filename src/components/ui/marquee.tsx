@@ -67,7 +67,7 @@ export const Marquee = React.forwardRef<HTMLDivElement, MarqueeProps>(
                   "font-bold text-transparent px-4"
                 )}
                 style={{
-                  WebkitTextStroke: `${strokeWidth} ${isDark ? 'rgb(128 128 128)' : 'rgb(209 213 219)'}`,
+                  WebkitTextStroke: `${strokeWidth} ${isDark ? 'rgb(64 64 64)' : 'rgb(156 163 175)'}`,
                 }}
               >
                 {text}

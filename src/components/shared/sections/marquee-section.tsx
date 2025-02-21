@@ -1,49 +1,66 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SparklesCore } from "@/components/ui/sparkles";
 
-// Option 1: Thin Font
 export function MarqueeSection() {
   return (
     <div className="relative w-full overflow-hidden bg-black py-24">
-      {/* Fixed sparkles background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <SparklesCore 
-          background="transparent"
-          minSize={0.4}
-          maxSize={1}
-          particleColor="#ffffff"
-          particleDensity={60}
-          speed={0.8}
-          className="h-full"
-        />
-      </div>
-
+      {/* Fade edges */}
+      <div className="absolute left-0 top-0 bottom-0 w-[15%] bg-gradient-to-r from-black to-transparent z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-[15%] bg-gradient-to-l from-black to-transparent z-10" />
+      
       {/* Marquee container */}
       <div className="relative flex overflow-x-hidden">
         <motion.div
-          className="flex gap-12"
+          className="flex whitespace-nowrap gap-16"
           animate={{ 
             x: ["0%", "-50%"]
           }}
           transition={{ 
             repeat: Infinity,
             ease: "linear",
-            duration: 25
+            duration: 25,
+            repeatType: "loop"
           }}
         >
           {[...Array(6)].map((_, index) => (
             <span 
               key={index} 
-              className="text-[120px] font-bold text-transparent tracking-wider shrink-0"
+              className="text-[100px] font-bold tracking-tight select-none"
               style={{
-                WebkitTextStroke: '0.8px rgba(255, 255, 255, 0.95)',
-                WebkitFontSmoothing: 'antialiased',
-                textRendering: 'optimizeLegibility',
-                letterSpacing: '0.15em',
-                filter: 'drop-shadow(0 0 0.5px rgba(255, 255, 255, 0.3))',
-                mixBlendMode: 'exclusion'
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.15) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: '0 0 30px rgba(255,255,255,0.05)'
+              }}
+            >
+              SYNTAI
+            </span>
+          ))}
+        </motion.div>
+
+        {/* Clone for seamless loop */}
+        <motion.div
+          className="flex whitespace-nowrap gap-16 absolute left-[100%]"
+          animate={{ 
+            x: ["0%", "-50%"]
+          }}
+          transition={{ 
+            repeat: Infinity,
+            ease: "linear",
+            duration: 25,
+            repeatType: "loop"
+          }}
+        >
+          {[...Array(6)].map((_, index) => (
+            <span 
+              key={index} 
+              className="text-[100px] font-bold tracking-tight select-none"
+              style={{
+                background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.15) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: '0 0 30px rgba(255,255,255,0.05)'
               }}
             >
               SYNTAI

@@ -3,7 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 const solutions = [
   {
@@ -110,31 +110,36 @@ export function Solutions() {
               className="w-full max-w-sm"
             >
               <Link href={solution.href} className="block group">
-                <div className="relative p-6 rounded-lg border border-white/10 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition-colors h-[280px] flex flex-col items-center text-center">
-                  <GlowingEffect
-                    disabled={false}
-                    glow={true}
-                    variant="default"
-                    blur={2}
-                    spread={40}
-                    inactiveZone={0.2}
-                    borderWidth={1}
-                  />
-                  
-                  {/* Icon Container */}
-                  <div className="p-2.5 rounded-lg backdrop-blur-sm border border-white/10 mb-4 transition-transform duration-300 group-hover:scale-110">
-                    {solution.icon("w-6 h-6 text-white/80")}
+                <div className="relative p-6 rounded-lg border border-white/10 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition-colors h-[280px] flex flex-col items-center text-center overflow-hidden">
+                  <div className="absolute inset-0 rounded-lg overflow-hidden">
+                    <BorderBeam 
+                      colorFrom="rgba(255, 255, 255, 0.4)"
+                      colorTo="rgba(255, 255, 255, 0.2)"
+                      duration={6}
+                      size={150}
+                    />
                   </div>
                   
-                  <h3 className="text-3xl font-light text-white mb-2">
+                  {/* Icon Container */}
+                  <div className="relative p-2.5 rounded-lg backdrop-blur-sm border border-white/10 mb-4 overflow-hidden">
+                    {solution.icon("w-6 h-6 text-white/80")}
+                    <BorderBeam 
+                      colorFrom="rgba(255, 255, 255, 0.3)"
+                      colorTo="rgba(255, 255, 255, 0.15)"
+                      duration={6}
+                      size={30}
+                    />
+                  </div>
+                  
+                  <h3 className="text-3xl font-light text-white mb-2 relative z-10">
                     {solution.title}
                   </h3>
-                  <p className="text-sm text-white/60 mb-auto">
+                  <p className="text-sm text-white/60 mb-auto relative z-10">
                     {solution.description}
                   </p>
                   
                   {/* Metric */}
-                  <div className="mt-4 pt-4 border-t border-white/10 w-full flex items-center justify-between">
+                  <div className="flex items-center justify-between w-full mt-4 relative z-10">
                     <div className="flex items-baseline gap-1.5">
                       <span className="text-xl font-semibold text-white">
                         {solution.metric}
@@ -158,15 +163,12 @@ export function Solutions() {
           viewport={{ once: true }}
           className="relative max-w-2xl mx-auto text-center"
         >
-          <div className="relative p-8 rounded-lg border border-white/10 bg-black/40 backdrop-blur-sm">
-            <GlowingEffect
-              disabled={false}
-              glow={true}
-              variant="default"
-              blur={2}
-              spread={40}
-              inactiveZone={0.2}
-              borderWidth={1}
+          <div className="relative p-8 rounded-lg border border-white/10 bg-black/40 backdrop-blur-sm overflow-hidden">
+            <BorderBeam 
+              colorFrom="rgba(255, 255, 255, 0.4)"
+              colorTo="rgba(255, 255, 255, 0.2)"
+              duration={6}
+              size={150}
             />
             <h2 className="text-3xl text-white font-light mb-4">Ready to Transform Your Business?</h2>
             <p className="text-base text-white/60 mb-8">

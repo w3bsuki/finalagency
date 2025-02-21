@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { TextShimmerWave } from "@/components/ui/text-shimmer-wave";
+import { BorderBeam } from "@/components/ui/border-beam";
 import {
     ImageIcon,
     FileUp,
@@ -37,10 +38,7 @@ function useAutoResizeTextarea({
                 return;
             }
 
-            // Temporarily shrink to get the right scrollHeight
             textarea.style.height = `${minHeight}px`;
-
-            // Calculate new height
             const newHeight = Math.max(
                 minHeight,
                 Math.min(
@@ -55,14 +53,12 @@ function useAutoResizeTextarea({
     );
 
     useEffect(() => {
-        // Set initial height
         const textarea = textareaRef.current;
         if (textarea) {
             textarea.style.height = `${minHeight}px`;
         }
     }, [minHeight]);
 
-    // Adjust height on window resize
     useEffect(() => {
         const handleResize = () => adjustHeight();
         window.addEventListener("resize", handleResize);
@@ -82,10 +78,16 @@ export function VercelChat() {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
-            if (value.trim()) {
-                setValue("");
-                adjustHeight(true);
-            }
+            handleSubmit();
+        }
+    };
+
+    const handleSubmit = () => {
+        if (value.trim()) {
+            // TODO: Implement chat submission logic here
+            console.log("Submitting:", value);
+            setValue("");
+            adjustHeight(true);
         }
     };
 
@@ -94,9 +96,17 @@ export function VercelChat() {
             <div className="w-full">
                 <div className="relative bg-black/40 rounded-xl border border-white/10 backdrop-blur-sm overflow-hidden group hover:border-white/20 transition-all duration-300">
                     {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     
-                    <div className="overflow-y-auto relative">
+                    {/* Border Beam Effect */}
+                    <BorderBeam 
+                        colorFrom="rgba(255, 255, 255, 0.4)"
+                        colorTo="rgba(255, 255, 255, 0.2)"
+                        duration={6}
+                        size={150}
+                    />
+                    
+                    <div className="relative p-4">
                         <div className="relative">
                             <Textarea
                                 ref={textareaRef}
@@ -121,6 +131,7 @@ export function VercelChat() {
                                     overflow: "hidden",
                                 }}
                             />
+                            
                             {!value && (
                                 <div className="absolute left-4 top-3 pointer-events-none">
                                     <TextShimmerWave 
@@ -136,47 +147,79 @@ export function VercelChat() {
                                 </div>
                             )}
                         </div>
-                    </div>
 
-                    <div className="flex items-center justify-between p-3 border-t border-white/5">
-                        <div className="flex items-center gap-2">
-                            <button
-                                type="button"
-                                className="group p-2 hover:bg-white/5 rounded-lg transition-all duration-300 flex items-center gap-1"
-                            >
-                                <Paperclip className="w-4 h-4 text-white/60 group-hover:text-white/80 transition-colors" />
-                                <span className="text-xs text-white/40 hidden group-hover:inline transition-all duration-300">
-                                    Attach
-                                </span>
-                            </button>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <button
-                                type="button"
-                                className="px-2 py-1 rounded-lg text-sm text-white/60 transition-all duration-300 border border-dashed border-white/10 hover:border-white/20 hover:bg-white/5 flex items-center justify-between gap-1 hover:text-white/80"
-                            >
-                                <PlusIcon className="w-4 h-4" />
-                                Project
-                            </button>
-                            <button
-                                type="button"
-                                className={cn(
-                                    "px-1.5 py-1.5 rounded-lg text-sm transition-all duration-300 border flex items-center justify-between gap-1",
-                                    value.trim()
-                                        ? "bg-gradient-to-r from-blue-500 to-violet-500 border-transparent text-white hover:from-blue-600 hover:to-violet-600"
-                                        : "border-white/10 hover:border-white/20 hover:bg-white/5 text-white/60 hover:text-white/80"
-                                )}
-                            >
-                                <ArrowUpIcon
+                        <div className="flex items-center justify-between mt-2">
+                            <div className="flex items-center gap-2">
+                                <button
+                                    type="button"
+                                    className="group relative p-2 hover:bg-white/5 rounded-lg transition-all duration-300 flex items-center gap-1 overflow-hidden"
+                                >
+                                    <div className="absolute inset-0 rounded-lg overflow-hidden">
+                                        <BorderBeam 
+                                            colorFrom="rgba(255, 255, 255, 0.4)"
+                                            colorTo="rgba(255, 255, 255, 0.2)"
+                                            duration={6}
+                                            size={30}
+                                        />
+                                    </div>
+                                    <div className="relative z-10 flex items-center gap-1">
+                                        <Paperclip className="w-4 h-4 text-white/60 group-hover:text-white/80 transition-colors" />
+                                        <span className="text-xs text-white/40 hidden group-hover:inline transition-all duration-300">
+                                            Attach
+                                        </span>
+                                    </div>
+                                </button>
+                            </div>
+                            
+                            <div className="flex items-center gap-2">
+                                <button
+                                    type="button"
+                                    className="relative px-2 py-1 rounded-lg text-sm text-white/60 transition-all duration-300 border border-dashed border-white/10 hover:border-white/20 hover:bg-white/5 flex items-center justify-between gap-1 hover:text-white/80 overflow-hidden"
+                                >
+                                    <div className="absolute inset-0 rounded-lg overflow-hidden">
+                                        <BorderBeam 
+                                            colorFrom="rgba(255, 255, 255, 0.4)"
+                                            colorTo="rgba(255, 255, 255, 0.2)"
+                                            duration={6}
+                                            size={30}
+                                        />
+                                    </div>
+                                    <div className="relative z-10 flex items-center gap-1">
+                                        <PlusIcon className="w-4 h-4" />
+                                        Project
+                                    </div>
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={handleSubmit}
                                     className={cn(
-                                        "w-4 h-4",
+                                        "relative px-1.5 py-1.5 rounded-lg text-sm transition-all duration-300 border flex items-center justify-between gap-1 overflow-hidden",
                                         value.trim()
-                                            ? "text-white"
-                                            : "text-white/60 group-hover:text-white/80"
+                                            ? "bg-gradient-to-r from-blue-500 to-violet-500 border-transparent text-white hover:from-blue-600 hover:to-violet-600"
+                                            : "border-white/10 hover:border-white/20 hover:bg-white/5 text-white/60 hover:text-white/80"
                                     )}
-                                />
-                                <span className="sr-only">Send</span>
-                            </button>
+                                >
+                                    <div className="absolute inset-0 rounded-lg overflow-hidden">
+                                        <BorderBeam 
+                                            colorFrom="rgba(255, 255, 255, 0.4)"
+                                            colorTo="rgba(255, 255, 255, 0.2)"
+                                            duration={6}
+                                            size={30}
+                                        />
+                                    </div>
+                                    <div className="relative z-10">
+                                        <ArrowUpIcon
+                                            className={cn(
+                                                "w-4 h-4",
+                                                value.trim()
+                                                    ? "text-white"
+                                                    : "text-white/60 group-hover:text-white/80"
+                                            )}
+                                        />
+                                    </div>
+                                    <span className="sr-only">Send</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -217,10 +260,20 @@ function ActionButton({ icon, label }: ActionButtonProps) {
     return (
         <button
             type="button"
-            className="flex items-center gap-2 px-4 py-2 bg-black/40 hover:bg-white/5 rounded-full border border-white/10 hover:border-white/20 text-white/60 hover:text-white/80 transition-all duration-300"
+            className="relative flex items-center gap-2 px-4 py-2 bg-black/40 hover:bg-white/5 rounded-full border border-white/10 hover:border-white/20 text-white/60 hover:text-white/80 transition-all duration-300 overflow-hidden"
         >
-            {icon}
-            <span className="text-xs">{label}</span>
+            <div className="absolute inset-0 rounded-full overflow-hidden">
+                <BorderBeam 
+                    colorFrom="rgba(255, 255, 255, 0.4)"
+                    colorTo="rgba(255, 255, 255, 0.2)"
+                    duration={6}
+                    size={50}
+                />
+            </div>
+            <div className="relative z-10 flex items-center gap-2">
+                {icon}
+                <span className="text-xs">{label}</span>
+            </div>
         </button>
     );
 } 
