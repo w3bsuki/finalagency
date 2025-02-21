@@ -4,6 +4,19 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
+interface PixelData {
+  x: number;
+  y: number;
+  color: [number, number, number, number];
+}
+
+interface ParticleData {
+  x: number;
+  y: number;
+  r: number;
+  color: string;
+}
+
 export function PlaceholdersAndVanishInput({
   placeholders,
   onChange,
@@ -16,27 +29,33 @@ export function PlaceholdersAndVanishInput({
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const startAnimation = () => {
+  const startAnimation = useCallback(() => {
     intervalRef.current = setInterval(() => {
       setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);
     }, 3000);
-  };
-  const handleVisibilityChange = () => {
+  }, [placeholders.length]);
+  const handleVisibilityChange = useCallback(() => {
     if (document.visibilityState !== "visible" && intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     } else if (document.visibilityState === "visible") {
       startAnimation();
     }
-  };
+  }, [startAnimation]);
 
   useEffect(() => {
     handleVisibilityChange();
     startAnimation();
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, [handleVisibilityChange, startAnimation]);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const newDataRef = useRef<any[]>([]);
+  const newDataRef = useRef<ParticleData[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState("");
   const [animating, setAnimating] = useState(false);
@@ -60,25 +79,25 @@ export function PlaceholdersAndVanishInput({
 
     const imageData = ctx.getImageData(0, 0, 800, 800);
     const pixelData = imageData.data;
-    const newData: any[] = [];
+    const newData: PixelData[] = [];
 
-    for (let t = 0; t < 800; t++) {
-      let i = 4 * t * 800;
+    for (let i = 0; i < 800; i++) {
+      const lineStart = 4 * i * 800;
       for (let n = 0; n < 800; n++) {
-        let e = i + 4 * n;
+        const pixelStart = lineStart + 4 * n;
         if (
-          pixelData[e] !== 0 &&
-          pixelData[e + 1] !== 0 &&
-          pixelData[e + 2] !== 0
+          pixelData[pixelStart] !== 0 &&
+          pixelData[pixelStart + 1] !== 0 &&
+          pixelData[pixelStart + 2] !== 0
         ) {
           newData.push({
             x: n,
-            y: t,
+            y: i,
             color: [
-              pixelData[e],
-              pixelData[e + 1],
-              pixelData[e + 2],
-              pixelData[e + 3],
+              pixelData[pixelStart],
+              pixelData[pixelStart + 1],
+              pixelData[pixelStart + 2],
+              pixelData[pixelStart + 3],
             ],
           });
         }
@@ -165,7 +184,9 @@ export function PlaceholdersAndVanishInput({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     vanishAndSubmit();
-    onSubmit && onSubmit(e);
+    if (onSubmit) {
+      onSubmit(e);
+    }
   };
 
   return (
