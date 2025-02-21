@@ -2,7 +2,7 @@
 
 import { GovernmentHero } from "@/components/shared/sections/solutions/government/hero";
 import { GovernmentFeatures } from "@/components/shared/sections/solutions/government/features";
-import { CTA } from "@/components/shared/sections/home/cta";
+import { CTA } from "@/components/shared/sections/cta";
 import { Separator } from "@/components/ui/separator";
 
 export default function GovernmentPage() {

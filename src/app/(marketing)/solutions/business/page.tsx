@@ -1,6 +1,6 @@
 import { BusinessHero } from "@/components/shared/sections/solutions/business/hero";
 import { BusinessFeatures } from "@/components/shared/sections/solutions/business/features";
-import { CTA } from "@/components/shared/sections/home/cta";
+import { CTA } from "@/components/shared/sections/cta";
 import { Separator } from "@/components/ui/separator";
 
 export default function BusinessSolutionsPage() {
