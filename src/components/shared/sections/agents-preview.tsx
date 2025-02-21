@@ -1,76 +1,81 @@
 "use client";
 
-import { Brain, Bot, Sparkles, ArrowRight } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { ShineBorder } from "@/components/ui/shine-border";
+import { motion } from "framer-motion";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
+import { RainbowButton } from "@/components/ui/rainbow-button";
+import { VercelChat } from "@/components/ui/vercel-chat";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 const agents = [
   {
     name: "AIDR",
-    title: "Most Powerful",
-    description: "Our most advanced AI agent, designed to handle complex tasks and deliver powerful solutions.",
+    description: "Most Powerful Agent",
+    longDescription: "Experience the power of advanced AI research and data analysis with our flagship agent.",
     href: "/agents/aidr",
-    icon: Brain,
-    color: "blue",
-    stats: [
-      { value: "40%", label: "Cost Reduction" },
-      { value: "2x", label: "Productivity" },
-      { value: "24/7", label: "Support" }
-    ],
-    features: [
-      "AI-powered analytics dashboard",
-      "Automated workflow optimization",
-      "Real-time performance tracking",
-      "Strategic decision support"
-    ]
+    icon: (className?: string) => (
+      <svg 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        className={className}
+        strokeWidth="1"
+      >
+        <path d="M12 4C7 4 3 8 3 13C3 18 7 22 12 22C17 22 21 18 21 13" strokeLinecap="round"/>
+        <path d="M12 4C17 4 21 8 21 13" strokeLinecap="round" strokeDasharray="1 3"/>
+        <path d="M12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8Z"/>
+      </svg>
+    ),
+    color: "white"
   },
   {
     name: "AIDO",
-    title: "Data Manager",
-    description: "Specialized in organizing, analyzing, and optimizing your data infrastructure.",
+    description: "Process Optimization Agent",
+    longDescription: "Transform your operations with AI-powered optimization and automation.",
     href: "/agents/aido",
-    icon: Bot,
-    color: "green",
-    stats: [
-      { value: "85%", label: "Efficiency Gain" },
-      { value: "60%", label: "Less Downtime" },
-      { value: "24/7", label: "Monitoring" }
-    ],
-    features: [
-      "Predictive maintenance",
-      "Quality control automation",
-      "Supply chain optimization",
-      "Energy efficiency monitoring"
-    ]
+    icon: (className?: string) => (
+      <svg 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        className={className}
+        strokeWidth="1"
+      >
+        <path d="M12 3L20 7.5V16.5L12 21L4 16.5V7.5L12 3Z" strokeLinecap="round"/>
+        <path d="M12 8V16" strokeLinecap="round"/>
+        <path d="M8 10L12 12L16 10" strokeLinecap="round"/>
+      </svg>
+    ),
+    color: "white"
   },
   {
     name: "AIDY",
-    title: "Customer Support",
-    description: "Intelligent assistance and support for all your customer service needs.",
+    description: "Customer Support Agent",
+    longDescription: "Experience seamless customer support with our AI-powered assistant that understands and responds in real-time.",
     href: "/agents/aidy",
-    icon: Sparkles,
-    color: "purple",
-    stats: [
-      { value: "99.9%", label: "Satisfaction" },
-      { value: "+60%", label: "Efficiency" },
-      { value: "24/7", label: "Service" }
-    ],
-    features: [
-      "24/7 customer support",
-      "Multi-language support",
-      "Ticket automation",
-      "Customer insights"
-    ]
+    icon: (className?: string) => (
+      <svg 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        className={className}
+        strokeWidth="1"
+      >
+        <path d="M12 4C6.48 4 2 8.48 2 14C2 16.25 2.99 18.28 4.5 19.75" strokeLinecap="round"/>
+        <path d="M19.5 19.75C21.01 18.28 22 16.25 22 14C22 8.48 17.52 4 12 4" strokeLinecap="round"/>
+        <path d="M12 14C12.5523 14 13 13.5523 13 13C13 12.4477 12.5523 12 12 12C11.4477 12 11 12.4477 11 13C11 13.5523 11.4477 14 12 14Z" />
+        <path d="M8 13C8 13 8 14 12 14C16 14 16 13 16 13" strokeLinecap="round"/>
+      </svg>
+    ),
+    color: "white"
   }
 ];
 
 export function AgentsPreview() {
   return (
-    <section className="w-full py-24 relative overflow-hidden">
+    <section className="relative w-full flex flex-col items-center justify-center overflow-hidden bg-black py-24">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_-100px,rgba(59,130,246,0.1),transparent)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-black via-black to-black/90" />
@@ -87,165 +92,105 @@ export function AgentsPreview() {
         className="absolute right-0 bottom-1/4 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.06)_0%,rgba(59,130,246,0)_70%)] blur-[60px] animate-pulse"
         style={{ animationDuration: '10s', animationDelay: '2s' }}
       />
-      <div 
-        className="absolute left-1/4 bottom-0 w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle_at_center,rgba(147,51,234,0.05)_0%,rgba(147,51,234,0)_70%)] blur-[60px] animate-pulse"
-        style={{ animationDuration: '8s', animationDelay: '1s' }}
-      />
 
       <div className="container relative z-10 max-w-6xl mx-auto px-4">
-        <div className="flex flex-col items-center gap-4 text-center mb-16">
-          <div className="opacity-0 translate-y-4 animate-[fadeIn_0.5s_ease-out_forwards]">
-            <Badge 
-              variant="outline" 
-              className="bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors px-4 py-1.5 text-sm backdrop-blur-sm border border-blue-500/20"
-            >
-              Our AI Agents
-            </Badge>
-          </div>
-          
-          <h2 
-            className="max-w-2xl text-4xl sm:text-5xl lg:text-6xl font-bold text-white opacity-0 translate-y-4 animate-[fadeIn_0.5s_ease-out_0.1s_forwards]"
+        {/* Header with separator */}
+        <div className="flex items-center gap-4 mb-16">
+          <span className="text-3xl text-white font-light tracking-wide">Agents</span>
+          <div className="h-[1px] flex-grow bg-white/10" />
+          <Link 
+            href="/agents" 
+            className="text-lg text-white/60 hover:text-white transition-colors flex items-center gap-2 group font-light tracking-wide"
           >
-            Meet Your AI Companions
-          </h2>
-          
-          <p 
-            className="text-white/90 max-w-[42rem] text-lg sm:text-xl font-medium opacity-0 translate-y-4 animate-[fadeIn_0.5s_ease-out_0.2s_forwards]"
-          >
-            Discover our specialized AI agents designed to enhance your workflow
-          </p>
+            All Agents
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Agents Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 place-items-center">
           {agents.map((agent, index) => (
-            <div
+            <motion.div
               key={agent.name}
-              className="opacity-0 translate-y-4 animate-[fadeIn_0.5s_ease-out_forwards]"
-              style={{ animationDelay: `${0.3 + index * 0.1}s` }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="w-full max-w-sm"
             >
-              <Link href={agent.href} className="block h-full group">
-                <Card className="h-full flex flex-col relative overflow-hidden border border-white/[0.08] bg-black/40 backdrop-blur-sm">
-                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.12] to-white/[0.08] hover:from-white/[0.15] hover:to-white/[0.10] transition-all duration-300" />
+              <div className="relative p-6 rounded-lg border border-white/10 bg-black/40 backdrop-blur-sm hover:bg-black/60 transition-colors h-[300px] flex flex-col items-center text-center">
+                <BorderBeam
+                  colorFrom="rgba(255, 255, 255, 0.2)"
+                  colorTo="rgba(255, 255, 255, 0.1)"
+                  duration={4}
+                  size={100}
+                />
+                
+                {/* Icon Container */}
+                <div className="p-2.5 rounded-lg backdrop-blur-sm border border-white/10 mb-4 transition-transform duration-300 group-hover:scale-110">
+                  {agent.icon("w-6 h-6 text-white/80")}
+                </div>
+                
+                {/* Content Container */}
+                <div className="flex-1 flex flex-col items-center">
+                  <h3 className="text-3xl font-light text-white mb-2">
+                    {agent.name}
+                  </h3>
                   
-                  <CardHeader className="relative">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={cn(
-                        "p-2.5 rounded-xl backdrop-blur-sm border transition-transform duration-300 group-hover:scale-110",
-                        agent.color === "blue" ? "bg-blue-500/20 border-blue-500/30" :
-                        agent.color === "green" ? "bg-emerald-500/20 border-emerald-500/30" :
-                        "bg-purple-500/20 border-purple-500/30"
-                      )}>
-                        <agent.icon className={cn(
-                          "h-6 w-6",
-                          agent.color === "blue" ? "text-blue-400" :
-                          agent.color === "green" ? "text-emerald-400" :
-                          "text-purple-400"
-                        )} />
-                      </div>
-                      <div className="space-y-1">
-                        <Badge 
-                          variant="outline" 
-                          className={cn(
-                            "px-2 py-0.5 text-xs font-medium backdrop-blur-sm",
-                            agent.color === "blue" ? "bg-blue-500/10 border-blue-500/20 text-blue-400" :
-                            agent.color === "green" ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" :
-                            "bg-purple-500/10 border-purple-500/20 text-purple-400"
-                          )}
-                        >
-                          {agent.title}
-                        </Badge>
-                        <CardTitle className="text-2xl font-bold text-white">
-                          {agent.name}
-                        </CardTitle>
-                      </div>
-                    </div>
-                    <CardDescription className="text-base text-white/90">
-                      {agent.description}
-                    </CardDescription>
-                  </CardHeader>
+                  <p className="text-sm text-white/60 mb-3">
+                    {agent.description}
+                  </p>
+                  
+                  <p className="text-xs text-white/40 max-w-[240px] leading-relaxed">
+                    {agent.longDescription}
+                  </p>
+                </div>
 
-                  <CardContent className="flex-1 flex flex-col justify-between">
-                    {/* Stats */}
-                    <div className={cn(
-                      "grid grid-cols-3 gap-4 pt-4 border-t",
-                      agent.color === "blue" ? "border-blue-500/30" :
-                      agent.color === "green" ? "border-emerald-500/30" :
-                      "border-purple-500/30"
-                    )}>
-                      {agent.stats.map((stat, i) => (
-                        <div key={i} className="text-center">
-                          <p className="text-lg font-bold mb-1 text-white">{stat.value}</p>
-                          <p className="text-xs text-white/70">{stat.label}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Features */}
-                    <div className="space-y-3 mt-6">
-                      {agent.features.map((feature, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <div className={cn(
-                            "h-1.5 w-1.5 rounded-full",
-                            agent.color === "blue" ? "bg-blue-400" :
-                            agent.color === "green" ? "bg-emerald-400" :
-                            "bg-purple-400"
-                          )} />
-                          <span className="text-sm text-white/90 font-medium group-hover:text-white transition-colors duration-300">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className={cn(
-                      "pt-6 mt-6 border-t",
-                      agent.color === "blue" ? "border-blue-500/30" :
-                      agent.color === "green" ? "border-emerald-500/30" :
-                      "border-purple-500/30"
-                    )}>
-                      <Button 
-                        variant="outline" 
-                        className={cn(
-                          "w-full rounded-full backdrop-blur-sm text-white group border transition-all duration-300",
-                          agent.color === "blue" ? "bg-blue-500/10 border-blue-500/30 hover:bg-blue-500/20 hover:border-blue-500/40" :
-                          agent.color === "green" ? "bg-emerald-500/10 border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-500/40" :
-                          "bg-purple-500/10 border-purple-500/30 hover:bg-purple-500/20 hover:border-purple-500/40"
-                        )}
-                      >
-                        Learn More
-                        <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            </div>
+                {/* Action Button - Centered at bottom */}
+                <div className="mt-4 w-full px-4">
+                  <RainbowButton 
+                    href={agent.href}
+                    className="w-full text-[11px] font-light tracking-wider py-1"
+                  >
+                    <span className="flex items-center justify-center gap-1.5">
+                      {agent.name === "AIDY" ? "Demo" : `Meet ${agent.name}`}
+                      <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </RainbowButton>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
 
-        <div 
-          className="flex justify-center mt-16 opacity-0 translate-y-4 animate-[fadeIn_0.5s_ease-out_forwards]"
-          style={{ animationDelay: '0.6s' }}
+        {/* AI Chat Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative"
         >
-          <ShineBorder
-            borderRadius={9999}
-            borderWidth={1}
-            duration={8}
-            color={["rgba(255,255,255,0.2)", "rgba(255,255,255,0.4)"]}
-            className="w-fit h-fit min-h-0 transform transition-transform duration-300 hover:scale-[1.02]"
-          >
-            <Button 
-              size="lg" 
-              className="h-12 px-8 rounded-full text-base font-medium bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm border-0 transition-all duration-300"
-              asChild
-            >
-              <Link href="/agents" className="flex items-center">
-                Explore All Agents
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-          </ShineBorder>
-        </div>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl text-white font-light mb-4">Ask our Agents</h2>
+              <p className="text-white/60 max-w-2xl mx-auto text-lg">
+                Experience the power of our AI agents firsthand. Ask a question or describe your needs.
+              </p>
+            </div>
+
+            <div className="relative">
+              <VercelChat />
+              <div className="absolute top-0 left-0 right-0 h-[64px] rounded-lg overflow-hidden">
+                <BorderBeam 
+                  colorFrom="rgba(255, 255, 255, 0.2)"
+                  colorTo="rgba(255, 255, 255, 0.1)"
+                  duration={4}
+                  size={100}
+                />
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

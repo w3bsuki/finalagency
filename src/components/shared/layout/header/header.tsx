@@ -1,220 +1,132 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import { Menu, MoveRight, X } from "lucide-react";
-import { useState } from "react";
 import Link from "next/link";
-import { ModeToggle } from "@/components/shared/ModeToggle";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { Menu, X, Phone } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 export function Header() {
-    const navigationItems = [
-        {
-            title: "Agents",
-            description: "Meet our AI agents",
-            href: "/agents",
-            items: [
-                {
-                    title: "Aidr",
-                    href: "/agents/aidr",
-                    description: "Most Powerful"
-                },
-                {
-                    title: "Aido",
-                    href: "/agents/aido",
-                    description: "Data Manager"
-                },
-                {
-                    title: "Aidy",
-                    href: "/agents/aidy",
-                    description: "Customer Support"
-                }
-            ]
-        },
-        {
-            title: "Solutions",
-            description: "AI Solutions",
-            href: "/solutions",
-            items: [
-                {
-                    title: "Business",
-                    href: "/solutions/business",
-                    description: "Strategic AI implementation"
-                },
-                {
-                    title: "Industry",
-                    href: "/solutions/industry",
-                    description: "Tailored AI solutions"
-                },
-                {
-                    title: "Government",
-                    href: "/solutions/government",
-                    description: "Seamless AI integration"
-                }
-            ]
-        },
-        {
-            title: "About",
-            description: "Our Company",
-            href: "/about",
-            items: [
-                {
-                    title: "About Us",
-                    href: "/about",
-                    description: "Learn about our company"
-                },
-                {
-                    title: "Our Mission",
-                    href: "/about#mission",
-                    description: "Our vision and values"
-                },
-                {
-                    title: "Our Team",
-                    href: "/about#team",
-                    description: "Meet the experts behind our solutions"
-                }
-            ]
-        }
-    ];
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
-    const [isOpen, setOpen] = useState(false);
-    return (
-        <header className="w-full fixed top-0 left-0 z-[100] bg-background">
-            <div className="border-b border-border/40">
-                <div className="container mx-auto h-16 flex items-center justify-between">
-                    <div className="flex items-center gap-8">
-                        <Button 
-                            variant="ghost" 
-                            size="icon" 
-                            onClick={() => setOpen(!isOpen)} 
-                            className="h-9 w-9 lg:hidden -ml-3 relative z-[101]"
-                        >
-                            {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-                        </Button>
-                        <NavigationMenu className="hidden lg:block">
-                            <NavigationMenuList className="flex gap-8">
-                                {navigationItems.map((item) => (
-                                    <NavigationMenuItem key={item.title}>
-                                        <NavigationMenuTrigger className="text-sm">
-                                            {item.title}
-                                        </NavigationMenuTrigger>
-                                        <NavigationMenuContent className="!w-[450px] p-4">
-                                            <div className="flex flex-col lg:grid grid-cols-2 gap-4">
-                                                <div className="flex flex-col h-full justify-between">
-                                                    <div className="flex flex-col">
-                                                        <p className="text-base">{item.title}</p>
-                                                        <p className="text-muted-foreground text-sm">
-                                                            {item.description}
-                                                        </p>
-                                                    </div>
-                                                    <Button size="sm" className="mt-10" asChild>
-                                                        <Link href={item.href || "/contact"}>
-                                                            {item.href ? `All ${item.title}` : "Book a call today"}
-                                                        </Link>
-                                                    </Button>
-                                                </div>
-                                                <div className="flex flex-col text-sm h-full justify-end">
-                                                    {item.items?.map((subItem) => (
-                                                        <Link
-                                                            href={subItem.href}
-                                                            key={subItem.title}
-                                                            className="flex flex-row justify-between items-center hover:bg-muted py-2 px-4 rounded"
-                                                        >
-                                                            <div className="flex flex-col">
-                                                                <span>{subItem.title}</span>
-                                                                <span className="text-xs text-muted-foreground">{subItem.description}</span>
-                                                            </div>
-                                                            <MoveRight className="w-4 h-4 text-muted-foreground" />
-                                                        </Link>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </NavigationMenuContent>
-                                    </NavigationMenuItem>
-                                ))}
-                            </NavigationMenuList>
-                        </NavigationMenu>
-                    </div>
+  const navigation = [
+    { name: "Agents", href: "/agents" },
+    { name: "Solutions", href: "/solutions" },
+    { name: "About", href: "/about" },
+  ];
 
-                    <Link href="/" className="absolute left-1/2 -translate-x-1/2 font-semibold text-lg">
-                        SYNTAI
-                    </Link>
+  const whatsappLink = "https://wa.me/your_number_here"; // Replace with your WhatsApp number
 
-                    <div className="flex items-center gap-4">
-                        <ModeToggle />
-                        <div className="h-6 w-px bg-border/40 hidden md:block" />
-                        <div className="hidden md:flex items-center gap-3">
-                            <Button variant="outline" size="sm" asChild>
-                                <Link href="/contact">Book a Consultation</Link>
-                            </Button>
-                            <Button size="sm" asChild>
-                                <Link href="/contact">Contact us</Link>
-                            </Button>
-                        </div>
-                    </div>
+  return (
+    <nav className="w-full border-b border-white/10">
+      <div className="container mx-auto px-4">
+        <div className="relative flex h-16 items-center justify-between">
+          {/* Logo */}
+          <Link 
+            href="/" 
+            className="text-xl font-light tracking-wider hover:text-white/90 transition-colors"
+          >
+            SYNTAI
+          </Link>
+
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-1">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={cn(
+                  "px-4 py-2 text-lg font-light tracking-wide transition-colors border-b",
+                  pathname === item.href
+                    ? "text-white bg-white/10 border-transparent"
+                    : "text-white/80 hover:text-white border-transparent hover:border-white/60"
+                )}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Right side buttons */}
+          <div className="flex items-center gap-4">
+            {/* WhatsApp Button - Hidden on mobile */}
+            <div className="relative hidden md:block">
+              <div className="relative">
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="icon"
+                  className="relative h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <Link href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                    <Phone className="h-4 w-4" />
+                  </Link>
+                </Button>
+                <div className="absolute inset-0 rounded-md overflow-hidden">
+                  <BorderBeam 
+                    colorFrom="rgba(255, 255, 255, 0.2)"
+                    colorTo="rgba(255, 255, 255, 0.1)"
+                    duration={4}
+                    size={20}
+                  />
                 </div>
+              </div>
             </div>
 
-            {isOpen && (
-                <div className="fixed inset-0 top-16 h-[calc(100vh-4rem)] bg-background/95 backdrop-blur-sm z-[99] lg:hidden overflow-y-auto">
-                    <div className="container py-6">
-                        <div className="space-y-4">
-                            {navigationItems.map((item) => (
-                                <div key={item.title} className="py-2">
-                                    <div className="flex justify-between items-center mb-2">
-                                        <p className="text-lg font-medium">{item.title}</p>
-                                        <p className="text-xs text-muted-foreground tracking-wider">
-                                            {item.description}
-                                        </p>
-                                    </div>
-                                    <div className="space-y-2">
-                                        {item.items?.map((subItem) => (
-                                            <Link
-                                                key={subItem.title}
-                                                href={subItem.href}
-                                                onClick={() => setOpen(false)}
-                                                className="flex justify-between items-center text-muted-foreground hover:text-foreground py-2 px-2 rounded-md hover:bg-muted"
-                                            >
-                                                <div className="flex flex-col">
-                                                    <span>{subItem.title}</span>
-                                                    <span className="text-xs opacity-70">{subItem.description}</span>
-                                                </div>
-                                                <MoveRight className="w-4 h-4 stroke-1" />
-                                            </Link>
-                                        ))}
-                                        {item.href && (
-                                            <Link
-                                                href={item.href}
-                                                onClick={() => setOpen(false)}
-                                                className="flex justify-between items-center text-primary hover:text-primary py-2 px-2 rounded-md hover:bg-muted mt-4"
-                                            >
-                                                <span>All {item.title}</span>
-                                                <MoveRight className="w-4 h-4 stroke-1" />
-                                            </Link>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                            <div className="pt-4 mt-4 border-t border-border/40">
-                                <div className="flex flex-col gap-2">
-                                    <Button variant="outline" size="sm" asChild className="w-full">
-                                        <Link href="/contact">Book a Consultation</Link>
-                                    </Button>
-                                    <Button size="sm" asChild className="w-full">
-                                        <Link href="/contact">Contact us</Link>
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </header>
-    );
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {isOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div className="md:hidden border-t border-white/10">
+          <div className="container mx-auto px-4 py-2 space-y-1">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className={cn(
+                  "block px-4 py-2 text-base font-light tracking-wide rounded-md transition-colors",
+                  pathname === item.href
+                    ? "text-white bg-white/10"
+                    : "text-white/60 hover:text-white hover:bg-white/5"
+                )}
+              >
+                {item.name}
+              </Link>
+            ))}
+            {/* WhatsApp Link in Mobile Menu */}
+            <Link
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-2 px-4 py-2 text-base font-light tracking-wide rounded-md text-white/60 hover:text-white hover:bg-white/5"
+            >
+              <Phone className="h-4 w-4" />
+              Contact
+            </Link>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
 } 

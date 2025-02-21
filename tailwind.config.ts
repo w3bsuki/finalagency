@@ -1,11 +1,22 @@
 import type { Config } from "tailwindcss";
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
+const { default: flattenColorPalette } = require("tailwindcss/lib/util/flattenColorPalette");
+
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+ 
+  addBase({
+    ":root": newVars,
+  });
+}
 
 const config = {
     darkMode: ["class"],
     content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
   theme: {
@@ -18,7 +29,7 @@ const config = {
   	},
   	extend: {
   		fontFamily: {
-  			sans: ["var(--font-sans)"],
+  			sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
   		},
   		colors: {
   			border: "hsl(var(--border))",
@@ -54,6 +65,12 @@ const config = {
   				DEFAULT: "hsl(var(--card))",
   				foreground: "hsl(var(--card-foreground))",
   			},
+  			...colors,
+  			"color-1": "hsl(var(--color-1))",
+  			"color-2": "hsl(var(--color-2))",
+  			"color-3": "hsl(var(--color-3))",
+  			"color-4": "hsl(var(--color-4))",
+  			"color-5": "hsl(var(--color-5))",
   		},
   		borderRadius: {
   			lg: "var(--radius)",
@@ -74,8 +91,8 @@ const config = {
   				'50%': { opacity: '0.2' }
   			},
   			shimmer: {
-  				'0%': { backgroundPosition: '200% 0' },
-  				'100%': { backgroundPosition: '-200% 0' }
+  				'0%': { backgroundPosition: '100% 0' },
+  				'100%': { backgroundPosition: '-100% 0' }
   			},
         shine: {
           "0%": { backgroundPosition: "150% 50%" },
@@ -84,22 +101,34 @@ const config = {
         fadeIn: {
           "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" }
-        }
+        },
+        rainbow: {
+          "0%": { "background-position": "0%" },
+          "100%": { "background-position": "200%" }
+        },
   		},
   		animation: {
   			"accordion-down": "accordion-down 0.2s ease-out",
   			"accordion-up": "accordion-up 0.2s ease-out",
   			pulse: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-  			shimmer: 'shimmer 8s linear infinite',
+  			shimmer: 'shimmer 2s linear infinite',
         shine: "shine var(--duration) linear infinite",
-        fadeIn: "fadeIn 0.5s ease-out forwards"
+        fadeIn: "fadeIn 0.5s ease-out forwards",
+        rainbow: "rainbow var(--speed, 2s) infinite linear",
   		},
       backgroundSize: {
         "shine-size": "200% 100%"
-      }
+      },
+      variables: {
+        "--color-1": "217 91% 60%",  // Blue
+        "--color-2": "271 91% 65%",  // Purple
+        "--color-3": "156 72% 67%",  // Green
+        "--color-4": "1 91% 71%",    // Red
+        "--color-5": "41 91% 68%",   // Yellow
+      },
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [addVariablesForColors],
 } satisfies Config;
 
 export default config;
